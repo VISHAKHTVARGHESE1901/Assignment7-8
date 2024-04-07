@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dice Game</title>
+        <script type="text/javascript">
+        	var imagesArray = [
+    			'dice1.jpg',
+    			'dice2.jpg',
+    			'dice3.jpg',
+    			'dice4.jpg',
+    			'dice5.jpg',
+    			'dice6.jpg'
+			];
+
+
+    		let player1Score = 0;
+    		let player2Score = 0;
+
+			function displayRandomImage() {
+    			var num1 = Math.floor(Math.random() * imagesArray.length); // Dice of Player 1
+    			var img1 = imagesArray[num1];
+    			document.getElementById('randomImage1').src = img1;
+    			player1Score = player1Score + (num1+1);
+    			document.getElementById("Score1").innerHTML = player1Score;
+
+    			var num2 = Math.floor(Math.random() * imagesArray.length); // Dice of Player 2
+    			var img2 = imagesArray[num2];
+    			document.getElementById('randomImage2').src = img2;
+    			player2Score = player2Score + (num2+1);
+    			document.getElementById("Score2").innerHTML = player2Score;
+    
+    			var winnerElement = document.getElementById("Winner");
+
+    			if (player1Score >= 15 && player2Score >= 15) {
+        			winnerElement.innerHTML = "Both Players win<br><span style='font-size: 0.8em;'>Let's Play Again!</span>";
+        			player1Score = 0;
+        			player2Score = 0;
+    			} else if (player1Score >= 15) {
+        			winnerElement.innerHTML = "Player 1 wins<br><span style='font-size: 0.5em;'>Let's Play Again!</span>";
+        			player1Score = 0;
+        			player2Score = 0;
+        		} else if (player2Score >= 15) {
+        			winnerElement.innerHTML = "Player 2 wins<br><span style='font-size: 0.5em;'>Let's Play Again!</span>";
+        			player1Score = 0;
+        			player2Score = 0;
+    			} else {
+        			winnerElement.innerHTML = ""; // Clear the winner details
+    			}
+			} 
+
+			window.onload = function() {
+    			displayRandomImage();
+			}
+
+        </script>
+
+        <style>
+        	h1{
+        		text-align: center;
+        		font-family: sans-serif;
+        		color: white;
+        	}
+
+        	h2{
+        		font-family: cursive;
+        		color: white;
+        	}
+
+        	button{
+        		display: block;
+        		width: 150px; 
+        		height: 40px;  
+        		margin: 2% auto; 
+        		border-radius: 20px;
+        		font-size: 30px;
+        	}
+
+        	h3{
+        		font-family: cursive; 
+        		color: white;
+        	}
+        </style>
+	</head>
+	<body bgcolor="black">
+		<h1>Dice Game</h1>
+
+		<div style="display: flex; justify-content: center;">
+			<div>
+				<h2>Player 1</h2>
+				<img id="randomImage1" src="" alt="Random Image">
+			</div>
+			<div style="margin-left: 5%">
+				<h2 style="text-align: center; font-family: cursive; color: white;">Player 2</h2>
+				<img id="randomImage2" src="" alt="Random Image">
+			</div>
+		</div>
+
+		<button onclick="displayRandomImage()">Roll</button>
+
+		<div style="display: flex; justify-content: center;">
+    		<h3>Player 1 Score:&nbsp </h3> 
+    		<h3 id="Score1"></h3>
+		</div>
+
+		<div style="display: flex; justify-content: center;">
+    		<h3>Player 2 Score:&nbsp </h3> 
+    		<h3 id="Score2"></h3>
+		</div>
+
+		<h3 align="center"> Maximum Score: <b>15</b></h3>
+		<h1 id="Winner" style="font-family: cursive; color: red;"></h1>
+		
+	</body>
+</html>
